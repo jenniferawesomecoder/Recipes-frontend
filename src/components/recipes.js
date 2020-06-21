@@ -12,11 +12,11 @@ class Recipes {
       this.bindEventListeners();
       this.fetchAndLoadRecipes();
     }
-  
+
     fetchAndLoadRecipes() {
       this.adapter.getRecipes().then(recipes => this.createRecipes(recipes)).then(() => this.addRecipesToDom())
     }
-  
+
     bindEventListeners() {
       this.formSubmit.addEventListener("click", function() {
          event.preventDefault();
@@ -37,9 +37,9 @@ class Recipes {
         this.sortRecipes();
         this.toggleButtons();
       }.bind(this))
-    
+
     }
-  
+
     createArrayOfRecipeIngredients(ingredients) {
       let ingredientArray = [];
       for (let ingredient of ingredients) {
@@ -47,20 +47,20 @@ class Recipes {
       }
       return ingredientArray
     }
-  
+
     createRecipes(recipes) {
       for (let recipe of recipes) {
         let ingredients = this.createArrayOfRecipeIngredients(recipe.attributes.ingredients)
         this.recipes.push(new Recipe(recipe.attributes.title, recipe.attributes.image_link, recipe.attributes.recipe_link, ingredients))
       }
     }
-  
+
     addRecipesToDom() {
       for (let recipe of this.recipes) {
         recipe.createRecipeCard()
       }
     }
-  
+
     addRecipe() {
       const form = event.target.parentElement
       const ingredients = form[3].value.split(', ')
@@ -84,7 +84,7 @@ class Recipes {
         this.toggleForm();
       }.bind(this))
     }
-  
+
     hideOrShowElement(element) {
       if (element.classList.contains("hidden")) {
           element.classList.remove("hidden");
@@ -92,42 +92,41 @@ class Recipes {
         element.className += " hidden";
       }
     }
-  
+
     toggleForm() {
       const form = this.formSubmit.parentElement;
       this.hideOrShowElement(form);
     }
-  
+
     toggleButtons() {
       this.hideOrShowElement(this.formButtons);
     }
-  
+
     toggleDropDown() {
       const dropDown = document.getElementById("filter-drop-down");
       this.hideOrShowElement(dropDown);
       new Ingredients();
     }
-  
+
     clearRecipes() {
       this.cardContainer.innerHTML = "";
     }
-  
+
     getAndLoadRandomRecipeByIngredient() {
       this.clearRecipes();
       const ingredient = event.target.value
       this.adapter.getRecipeByIngredient(ingredient).then(json => this.loadRandomRecipe(json.data.attributes))
     }
-  
+
     loadRandomRecipe(recipe) {
       let ingredients = this.createArrayOfRecipeIngredients(recipe.ingredients)
       const r = new Recipe(recipe.title, recipe.image_link, recipe.recipe_link, ingredients)
       r.createRecipeCard();
     }
 
-    sortRecipes() {
-      this.recipes.sort((a, b) => a.title > b.title ? 1 : -1);
-      this.clearRecipes();
-      this.addRecipesToDom(this.recipes);
-    }
+    // sortRecipes() {
+    //   this.recipes.sort((a, b) => a.title > b.title ? 1 : -1);
+    //   this.clearRecipes();
+    //   this.addRecipesToDom(this.recipes);
+    // }
   }
-  
