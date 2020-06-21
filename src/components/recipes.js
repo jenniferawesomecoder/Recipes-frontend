@@ -7,7 +7,7 @@ class Recipes {
       this.addRecipeButton = document.getElementById("add-recipe");
       this.dropDownButton = document.getElementById("filter-button");
       this.ingredientDropDown = document.getElementById("filter-dropdown");
-      this.sortButton = document.getElementById('sort-button');
+      // this.sortButton = document.getElementById('sort-button');
       this.cardContainer = document.getElementById('recipe-card-container');
       this.bindEventListeners();
       this.fetchAndLoadRecipes();
@@ -33,10 +33,10 @@ class Recipes {
       this.ingredientDropDown.addEventListener("change", function() {
         this.getAndLoadRandomRecipeByIngredient();
       }.bind(this))
-      this.sortButton.addEventListener("click", function() {
-        this.sortRecipes();
-        this.toggleButtons();
-      }.bind(this))
+      // this.sortButton.addEventListener("click", function() {
+      //   this.sortRecipes();
+      //   this.toggleButtons();
+      // }.bind(this))
 
     }
 
