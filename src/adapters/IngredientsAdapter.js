@@ -1,6 +1,6 @@
 class IngredientsAdapter {
   constructor() {
-    this.baseURL = "http://localhost:3000/ingredients"
+    this.baseURL = "https://recipesproject.herokuapp.com/ingredients"
   }
 
   getIngredients() {
